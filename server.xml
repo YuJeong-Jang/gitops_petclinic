@@ -51,10 +51,10 @@
               maxTotal="20" 
               maxIdle="5" 
               maxWaitMillis="10000"
-              username="admin" 
-              password="powermvp" 
+              username="library" 
+              password="management1234!" 
               driverClassName="com.mysql.cj.jdbc.Driver"
-	          url="jdbc:mysql://mydb.crgedgvs64um.ap-northeast-2.rds.amazonaws.com:3306/board_db?useSSL=true&amp;serverTimezone=UTC"/>
+	          url="jdbc:mysql://13.125.230.157:3306/library?useSSL=true&amp;serverTimezone=UTC"/>
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share
