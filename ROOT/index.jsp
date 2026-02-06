@@ -24,29 +24,65 @@ response.setCharacterEncoding("UTF-8");
 
         body {
             font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            /* 무지개 그라데이션 애니메이션 백그라운드 */
+            background: linear-gradient(-45deg, 
+                #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, 
+                #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
+            background-size: 600% 600%;
+            animation: rainbowShift 8s ease infinite;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* 무지개 애니메이션 키프레임 */
+        @keyframes rainbowShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 100% 50%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            75% {
+                background-position: 0% 100%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             text-align: center;
             max-width: 600px;
             width: 90%;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .logo {
             font-size: 48px;
             font-weight: 700;
-            color: #667eea;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 4s ease infinite;
             margin-bottom: 20px;
+        }
+
+        /* 로고 텍스트 무지개 애니메이션 */
+        @keyframes rainbowText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         h1 {
@@ -64,11 +100,12 @@ response.setCharacterEncoding("UTF-8");
         }
 
         .architecture-info {
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.9);
             border-radius: 15px;
             padding: 25px;
             margin: 30px 0;
-            border-left: 5px solid #667eea;
+            border-left: 5px solid;
+            border-image: linear-gradient(to bottom, #ff6b6b, #4ecdc4) 1;
         }
 
         .architecture-info h3 {
@@ -90,12 +127,19 @@ response.setCharacterEncoding("UTF-8");
         }
 
         .tier {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
-            border-top: 4px solid #667eea;
+            border-top: 4px solid;
+            border-image: linear-gradient(45deg, #ff9ff3, #feca57) 1;
+            transition: all 0.3s ease;
+        }
+
+        .tier:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         .tier-web, .tier-app {
@@ -111,7 +155,10 @@ response.setCharacterEncoding("UTF-8");
 
         .tier-title {
             font-weight: bold;
-            color: #667eea;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-size: 16px;
             margin-bottom: 8px;
         }
@@ -124,8 +171,17 @@ response.setCharacterEncoding("UTF-8");
 
         .arrow {
             font-size: 28px;
-            color: #667eea;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: bold;
+            animation: arrowGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes arrowGlow {
+            from { filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.5)); }
+            to { filter: drop-shadow(0 0 10px rgba(78, 205, 196, 0.8)); }
         }
 
         .arrow-down {
@@ -150,6 +206,23 @@ response.setCharacterEncoding("UTF-8");
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
             margin: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
@@ -174,18 +247,27 @@ response.setCharacterEncoding("UTF-8");
         }
 
         .feature {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-top: 3px solid #667eea;
+            border-top: 3px solid;
+            border-image: linear-gradient(45deg, #a8e6cf, #ffd93d) 1;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .feature-icon {
             font-size: 14px;
             font-weight: bold;
-            color: #667eea;
-            background: #f8f9fa;
+            background: linear-gradient(45deg, #ff9ff3, #54a0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             padding: 8px 12px;
             border-radius: 20px;
             margin-bottom: 10px;
@@ -206,7 +288,7 @@ response.setCharacterEncoding("UTF-8");
         .footer {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid rgba(0,0,0,0.1);
             color: #888;
             font-size: 14px;
         }
@@ -214,11 +296,12 @@ response.setCharacterEncoding("UTF-8");
         .status {
             display: inline-block;
             padding: 5px 10px;
-            background: #28a745;
+            background: linear-gradient(45deg, #00b894, #00cec9);
             color: white;
             border-radius: 15px;
             font-size: 12px;
             margin: 0 5px;
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
@@ -249,7 +332,7 @@ response.setCharacterEncoding("UTF-8");
             }
         }
 
-        /* 애니메이션 효과 */
+        /* 컨테이너 페이드인 애니메이션 */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -263,14 +346,6 @@ response.setCharacterEncoding("UTF-8");
 
         .container {
             animation: fadeInUp 0.8s ease-out;
-        }
-
-        .feature {
-            transition: transform 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -356,6 +431,3 @@ response.setCharacterEncoding("UTF-8");
     </div>
 </body>
 </html>
-
-
-
